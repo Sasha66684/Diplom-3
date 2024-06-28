@@ -11,7 +11,7 @@ import pages.RegisterPage;
 import users.User;
 import users.UserChecks;
 import users.UserProperties;
-import static service.Endpoints.BROWSER;
+
 
 
 public class RegisterUserTest {
@@ -19,13 +19,14 @@ public class RegisterUserTest {
     User user;
     private final UserProperties userProperties = new UserProperties();
     private final UserChecks userChecks = new UserChecks();
-    private WebDriver webDriver;
+
+   WebDriver webDriver = WebDriverFactory.getWebDriver();
 
     @Before
     @DisplayName("Создать нового пользователя (create new User)")
     public void createUser() {
         user = User.getRandomUser();
-        webDriver = WebDriverFactory.getWebDriver(BROWSER);
+       // webDriver = WebDriverFactory.getWebDriver(BROWSER);
     }
     @Test
     @DisplayName("Регистрация пользователя (register User)")

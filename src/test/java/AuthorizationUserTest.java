@@ -12,7 +12,7 @@ import pages.RegisterPage;
 import users.User;
 import users.UserChecks;
 import users.UserProperties;
-import static service.Endpoints.BROWSER;
+
 
 
 public class AuthorizationUserTest {
@@ -21,7 +21,8 @@ public class AuthorizationUserTest {
     User user;
     private final UserProperties userProperties = new UserProperties();
     private final UserChecks userChecks = new UserChecks();
-    private WebDriver webDriver;
+
+    WebDriver webDriver = WebDriverFactory.getWebDriver();
 
     @Before
     @DisplayName("Создать нового пользователя.(create new User)")
@@ -29,7 +30,7 @@ public class AuthorizationUserTest {
         user = User.getRandomUser();
         ValidatableResponse response = userProperties.createNewUser(user);
         accessToken = User.getToken(response);
-        webDriver = WebDriverFactory.getWebDriver(BROWSER);
+
     }
 
     @Test

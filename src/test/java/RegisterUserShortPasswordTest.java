@@ -10,7 +10,7 @@ import pages.LoginPage;
 import pages.MainPage;
 import pages.RegisterPage;
 import users.User;
-import static service.Endpoints.BROWSER;
+
 
 
 
@@ -18,7 +18,8 @@ import static service.Endpoints.BROWSER;
 public class RegisterUserShortPasswordTest {
     User user;
     private final int passLength;
-    private WebDriver webDriver;
+
+   WebDriver webDriver = WebDriverFactory.getWebDriver();
 
     public RegisterUserShortPasswordTest(int passLength) {
         this.passLength = passLength;
@@ -30,7 +31,7 @@ public class RegisterUserShortPasswordTest {
     @DisplayName("Создать нового пользователя (create new User)")
     public void createUser() {
         user = User.getRandomUser();
-        webDriver = WebDriverFactory.getWebDriver(BROWSER);
+       // webDriver = WebDriverFactory.getWebDriver(BROWSER);
     }
 
     @Parameterized.Parameters

@@ -3,20 +3,26 @@ package driver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+
 
 public class WebDriverFactory {
-    public static WebDriver getWebDriver(String browserType) {
-        if (browserType.equalsIgnoreCase("firefox")) {
-            WebDriverManager.firefoxdriver().clearDriverCache().clearResolutionCache().setup();//
-            return new FirefoxDriver();
-        } else if (browserType.equalsIgnoreCase("yandex")) {
-            System.setProperty("webdriver.chrome.driver", "/Users/sasha/WebDriver/bin/yandexdriver");
-            return new ChromeDriver();
-
-        } else {
-            WebDriverManager.chromedriver();
-            return new ChromeDriver();
+    private static WebDriver webDriver;
+    public static WebDriver getWebDriver() {
+        if (webDriver == null) {
+            // Выбор браузера !!!
+            String browser = System.getProperty("browser", "yandex");
+            switch (browser) {
+                case "chrome":
+                    return WebDriverManager.chromedriver().create();
+                case "firefox":
+                    return WebDriverManager.firefoxdriver().create();
+                case "yandex":
+                    System.setProperty("webdriver.chrome.driver", "src/test/resources/yandexdriver");
+                    return new ChromeDriver();
+                default:
+                    throw new RuntimeException("Unsupported browser: " + browser);
+            }
         }
+        return webDriver;
     }
 }

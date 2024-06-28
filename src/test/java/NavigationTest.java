@@ -11,7 +11,7 @@ import pages.PersonalAccount;
 import users.User;
 import users.UserChecks;
 import users.UserProperties;
-import static service.Endpoints.BROWSER;
+
 
 
 public class NavigationTest {
@@ -19,7 +19,8 @@ public class NavigationTest {
     User user;
     private final UserProperties userProperties = new UserProperties();
     private final UserChecks userChecks = new UserChecks();
-    private WebDriver webDriver;
+
+   WebDriver webDriver = WebDriverFactory.getWebDriver();
 
     @Before
     @DisplayName("Создать нового пользователя (create new User)")
@@ -27,7 +28,7 @@ public class NavigationTest {
         user = User.getRandomUser();
         ValidatableResponse response = userProperties.createNewUser(user);
         accessToken = User.getToken(response);
-        webDriver = WebDriverFactory.getWebDriver(BROWSER);
+
     }
 
     @Test
